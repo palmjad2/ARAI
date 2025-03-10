@@ -31,11 +31,17 @@ public class ArmGraspAgent : Agent
     public float rotationSpeed = 30f;
 
     // Internal contact booleans
+    private bool InConta = false;
     private bool finger1InContact = false;
     private bool finger2InContact = false;
+
     private bool palmInContact = false;
 
     // Track how long each collider remains in contact
+
+    private float pointerBaseContactTime = 0f;
+    private float pointerEndContactTime = 0f;
+
     private float finger1ContactTime = 0f;
     private float finger2ContactTime = 0f;
     private float palmContactTime = 0f;
@@ -58,10 +64,26 @@ public class ArmGraspAgent : Agent
         // Reset more fingers here if needed
         palm.localRotation = Quaternion.identity;
 
+        pointerBaseContactTime = 0f;
+        pointerEndContactTime = 0f;
+        finger1ContactTime = 0f;
+        finger2ContactTime = 0f;
+        finger1ContactTime = 0f;
+        finger2ContactTime = 0f;
+        finger1ContactTime = 0f;
+        finger2ContactTime = 0f;
         finger1ContactTime = 0f;
         finger2ContactTime = 0f;
         palmContactTime = 0f;
 
+        finger1InContact = false;
+        finger2InContact = false;
+        finger1InContact = false;
+        finger2InContact = false;
+        finger1InContact = false;
+        finger2InContact = false;
+        finger1InContact = false;
+        finger2InContact = false;
         finger1InContact = false;
         finger2InContact = false;
         palmInContact = false;
@@ -73,6 +95,14 @@ public class ArmGraspAgent : Agent
     public override void CollectObservations(VectorSensor sensor)
     {
         // 1) Which finger/palm is in contact (as booleans -> 0 or 1).
+        sensor.AddObservation(finger1InContact ? 1f : 0f);
+        sensor.AddObservation(finger2InContact ? 1f : 0f);
+        sensor.AddObservation(finger1InContact ? 1f : 0f);
+        sensor.AddObservation(finger2InContact ? 1f : 0f);
+        sensor.AddObservation(finger1InContact ? 1f : 0f);
+        sensor.AddObservation(finger2InContact ? 1f : 0f);
+        sensor.AddObservation(finger1InContact ? 1f : 0f);
+        sensor.AddObservation(finger2InContact ? 1f : 0f);
         sensor.AddObservation(finger1InContact ? 1f : 0f);
         sensor.AddObservation(finger2InContact ? 1f : 0f);
         sensor.AddObservation(palmInContact ? 1f : 0f);
